@@ -1,0 +1,19 @@
+From 51926c18818da2ac832ca2b38e4864a169435bc4 Mon Sep 17 00:00:00 2001
+From: Jakub Ruzicka <jruzicka@redhat.com>
+Date: Mon, 16 Sep 2013 17:25:48 +0200
+Subject: [PATCH] Nuke pbr requirements handling
+
+---
+ setup.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 70c2b3f..afab729 100755
+--- a/setup.py
++++ b/setup.py
+@@ -18,5 +18,4 @@
+ import setuptools
+ 
+ setuptools.setup(
+-    setup_requires=['pbr'],
+     pbr=True)
