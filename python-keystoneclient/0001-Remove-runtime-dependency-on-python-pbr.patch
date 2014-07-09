@@ -1,24 +1,30 @@
-From a62ffcf4c25b27b16dfe175c80661a62a331c9f4 Mon Sep 17 00:00:00 2001
+From ecc9a52cfe944e72f7539917e0b2df2e4b8219c9 Mon Sep 17 00:00:00 2001
 From: Jakub Ruzicka <jruzicka@redhat.com>
 Date: Mon, 8 Jul 2013 15:22:05 +0200
 Subject: [PATCH] Remove runtime dependency on python-pbr
 
 ---
- keystoneclient/__init__.py | 5 +----
+ keystoneclient/__init__.py | 4 +---
  setup.py                   | 1 -
- 2 files changed, 1 insertion(+), 5 deletions(-)
+ 2 files changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/keystoneclient/__init__.py b/keystoneclient/__init__.py
-index ab4f7a1..f735877 100644
+index bd50f9f..991e8e6 100644
 --- a/keystoneclient/__init__.py
 +++ b/keystoneclient/__init__.py
-@@ -13,10 +13,7 @@
+@@ -13,8 +13,6 @@
  #    License for the specific language governing permissions and limitations
  #    under the License.
  
 -import pbr.version
 -
--
+ from keystoneclient import access
+ from keystoneclient import client
+ from keystoneclient import exceptions
+@@ -25,7 +23,7 @@ from keystoneclient import v2_0
+ from keystoneclient import v3
+ 
+ 
 -__version__ = pbr.version.VersionInfo('python-keystoneclient').version_string()
 +__version__ = "REDHATKEYSTONECLIENTVERSION"
  
@@ -34,3 +40,6 @@ index 7363757..09230a0 100644
  setuptools.setup(
 -    setup_requires=['pbr'],
      pbr=True)
+-- 
+1.9.3
+
