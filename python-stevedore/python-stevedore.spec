@@ -4,7 +4,7 @@
 
 Name:           python-stevedore
 Version:        0.15
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Manage dynamic plugins for Python applications
 
 Group:          Development/Languages
@@ -27,6 +27,7 @@ BuildRequires:  python3-setuptools
 BuildRequires:  python3-pbr
 BuildRequires:  python3-nose
 BuildRequires:  python3-mock
+BuildRequires:  python3-six
 %endif
 
 %description
@@ -89,6 +90,9 @@ popd
 %{python3_sitelib}/stevedore-%{version}-py?.?.egg-info
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 0.15-4
+- Update to current Master
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.15-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
