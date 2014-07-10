@@ -8,7 +8,7 @@
 Name:		openstack-heat
 Summary:	OpenStack Orchestration (heat)
 Version:	2014.1.1
-Release:	2.1%{?dist}
+Release:	2.2%{?dist}
 License:	ASL 2.0
 Group:		System Environment/Base
 URL:		http://www.openstack.org
@@ -28,7 +28,6 @@ Source20:   heat-dist.conf
 #
 Patch0001: 0001-Switch-to-using-M2Crypto.patch
 Patch0002: 0002-remove-pbr-runtime-dependency.patch
-Patch0003: 0003-Add-heat-keystone-setup-domain-script.patch
 
 BuildArch: noarch
 BuildRequires: git
@@ -61,12 +60,17 @@ BuildRequires: python-d2to1
 BuildRequires: systemd-units
 %if 0%{?with_doc}
 BuildRequires: python-oslo-config
+BuildRequires: python-oslo-messaging
+BuildRequires: python-stevedore
 BuildRequires: python-cinderclient
 BuildRequires: python-keystoneclient
 BuildRequires: python-novaclient
 BuildRequires: python-neutronclient
 BuildRequires: python-swiftclient
 BuildRequires: python-heatclient
+BuildRequires: python-ceilometerclient
+BuildRequires: python-glanceclient
+BuildRequires: python-troveclient
 %endif
 
 Requires: %{name}-common = %{version}-%{release}
@@ -80,7 +84,6 @@ Requires: %{name}-api-cloudwatch = %{version}-%{release}
 
 %patch0001 -p1
 %patch0002 -p1
-%patch0003 -p1
 sed -i s/REDHATHEATVERSION/%{version}/ heat/version.py
 sed -i s/REDHATHEATRELEASE/%{release}/ heat/version.py
 
@@ -366,6 +369,9 @@ AWS CloudWatch-compatible API to the Heat Engine
 
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 2014.1.1-2.2
+- Remove patches that are merged upstream and update others.
+
 * Fri Jun 13 2014 Jeff Peeler <jpeeler@redhat.com> - 2014.1.1-2.1
 - added heat-keystone-setup-domain script
 
