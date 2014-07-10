@@ -4,7 +4,7 @@
 
 Name:             openstack-ceilometer
 Version:          2014.1.1
-Release:          3%{?dist}
+Release:          4%{?dist}
 Summary:          OpenStack measurement collection service
 
 Group:            Applications/System
@@ -21,12 +21,11 @@ Source13:         %{name}-central.service
 Source14:         %{name}-alarm-notifier.service
 Source15:         %{name}-alarm-evaluator.service
 Source16:         %{name}-notification.service
+Source17:         %{pypi_name}.conf
 
 #
 # patches_base=2014.1.1
 #
-Patch0001: 0001-Ensure-routing-key-is-specified-in-the-address-for-a.patch
-Patch0002: 0002-remove-token-from-notifier-middleware.patch
 
 BuildArch:        noarch
 BuildRequires:    intltool
@@ -241,9 +240,6 @@ This package contains documentation files for ceilometer.
 %prep
 %setup -q -n ceilometer-%{version}
 
-%patch0001 -p1
-%patch0002 -p1
-
 find . \( -name .gitignore -o -name .placeholder \) -delete
 
 find ceilometer -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
@@ -254,16 +250,6 @@ sed -i '/setup_requires/d; /install_requires/d; /dependency_links/d' setup.py
 # Remove the requirements file so that pbr hooks don't add it
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
-
-# Programmatically update defaults in sample config
-# which is installed at /etc/ceilometer/ceilometer.conf
-# TODO: Make this more robust
-# Note it only edits the first occurance, so assumes a section ordering in sample
-# and also doesn't support multi-valued variables.
-while read name eq value; do
-  test "$name" && test "$value" || continue
-  sed -i "0,/^# *$name=/{s!^# *$name=.*!#$name=$value!}" etc/ceilometer/ceilometer.conf.sample
-done < %{SOURCE1}
 
 %build
 %{__python} setup.py build
@@ -292,9 +278,8 @@ install -d -m 755 %{buildroot}%{_localstatedir}/log/ceilometer
 # Install config files
 install -d -m 755 %{buildroot}%{_sysconfdir}/ceilometer
 install -p -D -m 640 %{SOURCE1} %{buildroot}%{_datadir}/ceilometer/ceilometer-dist.conf
-install -p -D -m 640 etc/ceilometer/ceilometer.conf.sample %{buildroot}%{_sysconfdir}/ceilometer/ceilometer.conf
+install -p -D -m 640 %{SOURCE17} %{buildroot}%{_sysconfdir}/ceilometer/ceilometer.conf
 install -p -D -m 640 etc/ceilometer/policy.json %{buildroot}%{_sysconfdir}/ceilometer/policy.json
-install -p -D -m 640 etc/ceilometer/sources.json %{buildroot}%{_sysconfdir}/ceilometer/sources.json
 install -p -D -m 640 etc/ceilometer/pipeline.yaml %{buildroot}%{_sysconfdir}/ceilometer/pipeline.yaml
 
 # Install initscripts for services
@@ -314,7 +299,6 @@ rm -f %{buildroot}%{_bindir}/ceilometer-debug
 rm -fr %{buildroot}%{python_sitelib}/tests/
 rm -fr %{buildroot}%{python_sitelib}/run_tests.*
 rm -f %{buildroot}/usr/share/doc/ceilometer/README*
-rm -f %{buildroot}/%{python_sitelib}/ceilometer/api/v1/static/LICENSE.*
 
 
 %pre common
@@ -470,7 +454,6 @@ fi
 %attr(-, root, ceilometer) %{_datadir}/ceilometer/ceilometer-dist.conf
 %config(noreplace) %attr(-, root, ceilometer) %{_sysconfdir}/ceilometer/ceilometer.conf
 %config(noreplace) %attr(-, root, ceilometer) %{_sysconfdir}/ceilometer/policy.json
-%config(noreplace) %attr(-, root, ceilometer) %{_sysconfdir}/ceilometer/sources.json
 %config(noreplace) %attr(-, root, ceilometer) %{_sysconfdir}/ceilometer/pipeline.yaml
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 
@@ -511,7 +494,6 @@ fi
 %{_unitdir}/%{name}-notification.service
 
 %files api
-%doc ceilometer/api/v1/static/LICENSE.*
 %{_bindir}/ceilometer-api
 %{_unitdir}/%{name}-api.service
 
@@ -529,6 +511,10 @@ fi
 
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 2014.1.1-4
+- Remove patches that are merged upstream.
+- Use static .conf (we don't have tox to generate on on the fly)
+
 * Wed Jun 25 2014 Steve Linabery <slinaber@redhat.com> - 2014.1.1-3
 - remove token from notifier middleware bz#1112949
 
@@ -582,7 +568,7 @@ fi
 * Fri Sep 13 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2-0.10.b3
 - Depend on python-oslo-config >= 1:1.2.0 so it upgraded automatically
 
-* Mon Sep 10 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2-0.8.b3
+* Tue Sep 10 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2-0.8.b3
 - Depend on python-pymongo rather than pymongo to avoid a puppet bug
 
 * Mon Sep 9 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2-0.7.b3
