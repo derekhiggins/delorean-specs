@@ -7,7 +7,7 @@
 
 Name:             openstack-swift
 Version:          1.13.1
-Release:          5%{?dist}
+Release:          6%{?dist}
 Summary:          OpenStack Object Storage (Swift)
 
 Group:            Development/Languages
@@ -55,8 +55,6 @@ Source7:          swift.conf
 #
 Patch0001: 0001-remove-runtime-requirement-on-pbr.patch
 Patch0002: 0002-Add-fixes-for-building-the-doc-package.patch
-Patch0003: 0003-Set-permissions-on-generated-ring-files.patch
-Patch0004: 0004-properly-quote-www-authenticate-header-value.patch
 
 BuildArch:        noarch
 BuildRequires:    python-devel
@@ -165,8 +163,6 @@ This package contains documentation files for %{name}.
 
 %patch0001 -p1
 %patch0002 -p1
-%patch0003 -p1
-%patch0004 -p1
 
 #sed -i 's/%{version}.%{milestone}/%{version}/' PKG-INFO
 
@@ -419,6 +415,8 @@ exit 0
 %{_bindir}/swift-container-replicator
 %{_bindir}/swift-container-updater
 %{_bindir}/swift-container-sync
+%{_bindir}/swift-container-reconciler
+%{_bindir}/swift-reconciler-enqueue
 %{python_sitelib}/swift/container
 
 %files object
@@ -469,6 +467,9 @@ exit 0
 %doc LICENSE doc/build/html
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 1.13.1-6
+- Remove patches that are merged upstream and update others.
+
 * Fri Jun 27 2014 Pete Zaitcev <zaitcev@redhat.com> - 1.13.1-5
 - Fix CVE-2014-3497, unquoted realm in WWW-Authenticate
 
