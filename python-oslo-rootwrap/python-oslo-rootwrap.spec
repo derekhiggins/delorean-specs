@@ -2,7 +2,7 @@
 
 Name:           python-oslo-rootwrap
 Version:        1.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Oslo Rootwrap
 
 License:        ASL 2.0
@@ -42,12 +42,14 @@ rm -rf %{pypi_name}.egg-info
 
 %files
 %doc README.rst LICENSE
-%{_bindir}/oslo-rootwrap
 %dir %{python_sitelib}/oslo
 %{python_sitelib}/oslo/rootwrap
 %{python_sitelib}/oslo.rootwrap-%{version}*
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 1.0.0-3
+- Update to upstream master
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
