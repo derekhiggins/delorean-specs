@@ -2,8 +2,8 @@
 
 Name:       python-oslo-config
 Epoch:      1
-Version:    1.2.1
-Release:    2%{?dist}
+Version:    1.4.0.0a1.21.g35c2810
+Release:    3%{?dist}
 Summary:    OpenStack common configuration library
 
 Group:      Development/Languages
@@ -78,11 +78,15 @@ rm -fr doc/build/html/.buildinfo
 %{python_sitelib}/oslo
 %{python_sitelib}/*.egg-info
 %{python_sitelib}/*-nspkg.pth
+%{_bindir}/oslo-config-generator
 
 %files doc
 %doc LICENSE doc/build/html
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 1:1.2.1-3
+- Update to upstream master
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.2.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
