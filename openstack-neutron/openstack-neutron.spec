@@ -2,7 +2,7 @@
 
 Name:		openstack-neutron
 Version:	2014.1.1
-Release:	5%{?dist}
+Release:	6%{?dist}
 Provides:	openstack-quantum = %{version}-%{release}
 Obsoletes:	openstack-quantum < 2013.2-0.4.b3
 Summary:	OpenStack Networking Service
@@ -33,12 +33,6 @@ Source30:	neutron-dist.conf
 # patches_base=2014.1.1+1
 #
 Patch0001: 0001-remove-runtime-dependency-on-pbr.patch
-Patch0002: 0002-Sync-service-and-systemd-modules-from-oslo-incubator.patch
-Patch0003: 0003-Removed-signing_dir-from-neutron.conf.patch
-Patch0004: 0004-Remove-kernel-version-check-for-OVS-VXLAN.patch
-Patch0005: 0005-Ensure-routing-key-is-specified-in-the-address-for-a.patch
-Patch0006: 0006-Notify-systemd-when-starting-Neutron-server.patch
-Patch0007: 0007-remove-token-from-notifier-middleware.patch
 
 BuildArch:	noarch
 
@@ -456,12 +450,6 @@ IPSec.
 %setup -q -n neutron-%{version}
 
 %patch0001 -p1
-%patch0002 -p1
-%patch0003 -p1
-%patch0004 -p1
-%patch0005 -p1
-%patch0006 -p1
-%patch0007 -p1
 
 find neutron -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 
@@ -756,19 +744,6 @@ fi
 %files
 %doc LICENSE
 %doc README.rst
-%{_bindir}/quantum-db-manage
-%{_bindir}/quantum-debug
-%{_bindir}/quantum-dhcp-agent
-%{_bindir}/quantum-l3-agent
-%{_bindir}/quantum-lbaas-agent
-%{_bindir}/quantum-metadata-agent
-%{_bindir}/quantum-netns-cleanup
-%{_bindir}/quantum-ns-metadata-proxy
-%{_bindir}/quantum-rootwrap
-%{_bindir}/quantum-rootwrap-xen-dom0
-%{_bindir}/quantum-server
-%{_bindir}/quantum-usage-audit
-
 %{_bindir}/neutron-db-manage
 %{_bindir}/neutron-debug
 %{_bindir}/neutron-dhcp-agent
@@ -781,6 +756,7 @@ fi
 %{_bindir}/neutron-rootwrap-xen-dom0
 %{_bindir}/neutron-server
 %{_bindir}/neutron-usage-audit
+%{_bindir}/neutron-sanity-check
 
 %{_unitdir}/neutron-dhcp-agent.service
 %{_unitdir}/neutron-l3-agent.service
@@ -817,7 +793,6 @@ fi
 %doc LICENSE
 %doc README.rst
 %{python_sitelib}/neutron
-%{python_sitelib}/quantum
 %exclude %{python_sitelib}/neutron/plugins/bigswitch
 %exclude %{python_sitelib}/neutron/plugins/brocade
 %exclude %{python_sitelib}/neutron/plugins/cisco
@@ -830,7 +805,6 @@ fi
 %exclude %{python_sitelib}/neutron/plugins/mlnx
 %exclude %{python_sitelib}/neutron/plugins/nuage
 %exclude %{python_sitelib}/neutron/plugins/nec
-%exclude %{python_sitelib}/neutron/plugins/nicira
 %exclude %{python_sitelib}/neutron/plugins/ofagent
 %exclude %{python_sitelib}/neutron/plugins/oneconvergence
 %exclude %{python_sitelib}/neutron/plugins/openvswitch
@@ -853,7 +827,6 @@ fi
 %files ibm
 %doc LICENSE
 %{_bindir}/neutron-ibm-agent
-%{_bindir}/quantum-ibm-agent
 %doc neutron/plugins/ibm/README
 %{python_sitelib}/neutron/plugins/ibm
 %dir %{_sysconfdir}/neutron/plugins/ibm
@@ -880,7 +853,6 @@ fi
 %doc LICENSE
 #%%doc neutron/plugins/hyperv/README
 %{_bindir}/neutron-hyperv-agent
-%{_bindir}/quantum-hyperv-agent
 %{python_sitelib}/neutron/plugins/hyperv
 %dir %{_sysconfdir}/neutron/plugins/hyperv
 %exclude %{python_sitelib}/neutron/plugins/hyperv/agent
@@ -891,7 +863,6 @@ fi
 %doc LICENSE
 %doc neutron/plugins/linuxbridge/README
 %{_bindir}/neutron-linuxbridge-agent
-%{_bindir}/quantum-linuxbridge-agent
 %{_unitdir}/neutron-linuxbridge-agent.service
 %{python_sitelib}/neutron/plugins/linuxbridge
 %{_datarootdir}/neutron/rootwrap/linuxbridge-plugin.filters
@@ -917,7 +888,6 @@ fi
 %files mellanox
 %doc neutron/plugins/mlnx/README
 %{_bindir}/neutron-mlnx-agent
-%{_bindir}/quantum-mlnx-agent
 %{_unitdir}/neutron-mlnx-agent.service
 %{python_sitelib}/neutron/plugins/mlnx
 %dir %{_sysconfdir}/neutron/plugins/mlnx
@@ -941,16 +911,13 @@ fi
 %dir %{_sysconfdir}/neutron/plugins/oneconvergence
 %config(noreplace) %attr(0640, root, neutron) %{_sysconfdir}/neutron/plugins/oneconvergence/nvsdplugin.ini
 %{_bindir}/neutron-nvsd-agent
-%{_bindir}/quantum-nvsd-agent
 %{python_sitelib}/neutron/plugins/oneconvergence
 
 %files openvswitch
 %doc LICENSE
 %doc neutron/plugins/openvswitch/README
 %{_bindir}/neutron-openvswitch-agent
-%{_bindir}/quantum-openvswitch-agent
 %{_bindir}/neutron-ovs-cleanup
-%{_bindir}/quantum-ovs-cleanup
 %{_unitdir}/neutron-openvswitch-agent.service
 %{_unitdir}/neutron-ovs-cleanup.service
 %{python_sitelib}/neutron/plugins/openvswitch
@@ -971,7 +938,6 @@ fi
 %doc LICENSE
 %doc neutron/plugins/ryu/README
 %{_bindir}/neutron-ryu-agent
-%{_bindir}/quantum-ryu-agent
 %{_unitdir}/neutron-ryu-agent.service
 %{python_sitelib}/neutron/plugins/ryu
 %{_datarootdir}/neutron/rootwrap/ryu-plugin.filters
@@ -983,7 +949,6 @@ fi
 %doc LICENSE
 %doc neutron/plugins/nec/README
 %{_bindir}/neutron-nec-agent
-%{_bindir}/quantum-nec-agent
 %{_unitdir}/neutron-nec-agent.service
 %{python_sitelib}/neutron/plugins/nec
 %{_datarootdir}/neutron/rootwrap/nec-plugin.filters
@@ -1001,14 +966,10 @@ fi
 
 %files vmware
 %doc LICENSE
-%{_bindir}/neutron-check-nvp-config
-%{_bindir}/quantum-check-nvp-config
 %{_bindir}/neutron-check-nsx-config
 %{_bindir}/neutron-nsx-manage
 %{python_sitelib}/neutron/plugins/vmware
-%dir %{_sysconfdir}/neutron/plugins/nicira
 %dir %{_sysconfdir}/neutron/plugins/vmware
-%config(noreplace) %attr(0640, root, neutron) %{_sysconfdir}/neutron/plugins/nicira/*.ini
 %config(noreplace) %attr(0640, root, neutron) %{_sysconfdir}/neutron/plugins/vmware/*.ini
 
 
@@ -1028,6 +989,9 @@ fi
 
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 2014.1.1-6
+- Remove patches that are merged upstream.
+
 * Wed Jul 02 2014 Jakub Libosvar <jlibosva@redhat.com> 2014.1.1-5
 - Disable nova notifications by default, bz#1093879
 
