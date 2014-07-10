@@ -5,15 +5,12 @@
 %endif
 
 %global	release_name icehouse
-%global	release_letter rc
-%global	milestone 1
-%global	full_release ironic-%{version}.%{release_letter}%{milestone}
-
+%global	full_release ironic-%{version}
 
 Name:		openstack-ironic
 Summary:	OpenStack Baremetal Hypervisor API (ironic)
 Version:	2014.1
-Release:	%{release_letter}%{milestone}.2%{?dist}.1
+Release:	2%{?dist}
 License:	ASL 2.0
 Group:		System Environment/Base
 URL:		http://www.openstack.org
@@ -176,6 +173,9 @@ Ironic Conductor for management and provisioning of physical machines
 
 
 %changelog
+* Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 2014.1-2
+- Update patch
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2014.1-rc1.2.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
