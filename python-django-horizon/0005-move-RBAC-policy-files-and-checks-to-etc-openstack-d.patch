@@ -1,32 +1,41 @@
-From 7676c2e8ffeeb2495d0fc6908d509aba5dc3dccb Mon Sep 17 00:00:00 2001
+From a4ba78c35c18ef560aa55380a944c4a241353ab4 Mon Sep 17 00:00:00 2001
 From: Matthias Runge <mrunge@redhat.com>
 Date: Mon, 9 Sep 2013 14:13:07 +0200
 Subject: [PATCH] move RBAC policy files and checks to /etc/openstack-dashboard
 
 ---
- openstack_dashboard/local/local_settings.py.example | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ openstack_dashboard/local/local_settings.py.example | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
 diff --git a/openstack_dashboard/local/local_settings.py.example b/openstack_dashboard/local/local_settings.py.example
-index 61cf4b1..8306143 100644
+index a4ec3e9..5cd7714 100644
 --- a/openstack_dashboard/local/local_settings.py.example
 +++ b/openstack_dashboard/local/local_settings.py.example
-@@ -248,12 +248,13 @@ TIME_ZONE = "UTC"
- # target installation.
+@@ -260,15 +260,16 @@ TIME_ZONE = "UTC"
  
  # Path to directory containing policy.json files
--#POLICY_FILES_PATH = os.path.join(ROOT_PATH, "conf")
-+# POLICY_FILES_PATH = os.path.join(ROOT_PATH, "conf")
+ #POLICY_FILES_PATH = os.path.join(ROOT_PATH, "conf")
 +POLICY_FILES_PATH = '/etc/openstack-dashboard'
  # Map of local copy of service policy files
 -#POLICY_FILES = {
 -#    'identity': 'keystone_policy.json',
--#    'compute': 'nova_policy.json'
+-#    'compute': 'nova_policy.json',
+-#    'volume': 'cinder_policy.json',
+-#    'image': 'glance_policy.json',
+-#    'orchestration': 'heat_policy.json',
+-#    'network': 'neutron_policy.json',
 -#}
 +POLICY_FILES = {
 +    'identity': 'keystone_policy.json',
-+    'compute': 'nova_policy.json'
++    'compute': 'nova_policy.json',
++    'volume': 'cinder_policy.json',
++    'image': 'glance_policy.json',
++    'orchestration': 'heat_policy.json',
++    'network': 'neutron_policy.json',
 +}
  
  # Trove user and database extension support. By default support for
  # creating users and databases on database instances is turned on.
+-- 
+1.9.3
+
