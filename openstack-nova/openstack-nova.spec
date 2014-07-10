@@ -639,7 +639,6 @@ exit 0
 %dir %attr(0755, nova, root) %{_localstatedir}/log/nova
 %dir %attr(0755, nova, root) %{_localstatedir}/run/nova
 
-%{_bindir}/nova-clear-rabbit-queues
 %{_bindir}/nova-manage
 %{_bindir}/nova-rootwrap
 
@@ -735,6 +734,7 @@ exit 0
 %changelog
 * Thu Jul 10 2014 Derek Higgins <derekh@redhat.com> - 2014.1.1-3
 - Remove patches that are merged upstream and update others
+- Remove nova-clear-rabbit-queues
 
 * Thu Jun 26 2014 Vladan Popovic <vpopovic@redhat.com> 2014.1.1-2
 - Fixes rbd backend image size - rhbz#1112871
