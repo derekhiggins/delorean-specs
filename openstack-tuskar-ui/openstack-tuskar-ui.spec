@@ -8,13 +8,6 @@ License:	  ASL 2.0
 URL:		    https://github.com/openstack/tuskar-ui
 Source0:	  https://pypi.python.org/packages/source/t/tuskar-ui/tuskar-ui-%{version}.tar.gz
 
-Patch0:     0001-Fixing-manifest.in.patch
-Patch1:     0003-Init-code-for-Instack-Undercloud.patch
-Patch2:     0004-Adding-missing-setup-for-instack.patch
-Patch3:     0005-Default-GlanceLogFile-template-parameter-value.patch
-Patch4:     0006-Import-keystoneclient.apiclient.exceptions.patch
-Patch5:     0007-Ensure-ipmi-username-and-password-are-set.patch
-
 BuildArch:     noarch
 
 BuildRequires: python2-devel
@@ -71,12 +64,6 @@ deployments. It is a plugin for OpenStack Horizon.
 
 %prep
 %setup -q -n tuskar-ui-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
 rm -rf tuskar_ui.egg-info/
 
 # Remove the requirements file so that pbr hooks don't add it
