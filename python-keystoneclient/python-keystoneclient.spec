@@ -3,8 +3,8 @@ Name:       python-keystoneclient
 # and restarted version numbering from 0.1.1
 # https://lists.launchpad.net/openstack/msg14248.html
 Epoch:      1
-Version:    0.9.0
-Release:    3%{?dist}
+Version:    XXX
+Release:    1%{?dist}
 Summary:    Client library for OpenStack Identity API
 License:    ASL 2.0
 URL:        http://pypi.python.org/pypi/%{name}
@@ -95,7 +95,7 @@ rm -fr html/.doctrees html/.buildinfo
 %doc LICENSE html
 
 %changelog
-* Wed Jul 09 2014 Derek Higgins <derekh@redhat.com> - 1:0.9.0-3
+* Wed Jul 09 2014 Derek Higgins <derekh@redhat.com> - XXX
 - Remove patches that are merged upstream and update others
 
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:0.9.0-2

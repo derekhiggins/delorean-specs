@@ -1,4 +1,4 @@
-From ecc9a52cfe944e72f7539917e0b2df2e4b8219c9 Mon Sep 17 00:00:00 2001
+From 9e4b94ae7bcd01a9d2425a1cf2193aeda400b9fe Mon Sep 17 00:00:00 2001
 From: Jakub Ruzicka <jruzicka@redhat.com>
 Date: Mon, 8 Jul 2013 15:22:05 +0200
 Subject: [PATCH] Remove runtime dependency on python-pbr
@@ -9,19 +9,19 @@ Subject: [PATCH] Remove runtime dependency on python-pbr
  2 files changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/keystoneclient/__init__.py b/keystoneclient/__init__.py
-index bd50f9f..991e8e6 100644
+index a3c0408..483a69f 100644
 --- a/keystoneclient/__init__.py
 +++ b/keystoneclient/__init__.py
-@@ -13,8 +13,6 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
+@@ -22,8 +22,6 @@ See :py:class:`keystoneclient.v2_0.client.Client` for the Identity V2.0 client.
+ """
+ 
  
 -import pbr.version
 -
  from keystoneclient import access
  from keystoneclient import client
  from keystoneclient import exceptions
-@@ -25,7 +23,7 @@ from keystoneclient import v2_0
+@@ -34,7 +32,7 @@ from keystoneclient import v2_0
  from keystoneclient import v3
  
  
