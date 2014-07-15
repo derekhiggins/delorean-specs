@@ -126,9 +126,6 @@ sed -i '/setuptools_git/d; /setup_requires/d; /install_requires/d; /dependency_l
 sed -i s/REDHATGLANCEVERSION/%{version}/ glance/version.py
 sed -i s/REDHATGLANCERELEASE/%{release}/ glance/version.py
 
-# make doc build compatible with python-oslo-sphinx RPM
-sed -i 's/oslosphinx/oslo.sphinx/' doc/source/conf.py
-
 # Remove the requirements file so that pbr hooks don't add it
 # to distutils requiers_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires

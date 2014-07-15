@@ -1,14 +1,11 @@
 Name:		diskimage-builder
 Summary:	Image building tools for OpenStack
-Version:	0.1.15
-Release:	3%{?dist}
+Version:	XXX
+Release:	1%{?dist}
 License:	ASL 2.0
 Group:		System Environment/Base
 URL:		https://launchpad.net/diskimage-builder
 Source0:	http://tarballs.openstack.org/diskimage-builder/%{name}-%{version}.tar.gz
-
-# https://review.openstack.org/#/c/103451/
-Patch0001: Remove-fixfiles-from-rpm-distro-finalize.patch
 
 BuildArch: noarch
 BuildRequires: python2-devel
@@ -27,8 +24,6 @@ Requires: dib-utils
 
 %prep
 %setup -q -n %{name}-%{version}
-
-%patch0001 -p1
 
 %build
 %{__python} setup.py build
@@ -61,6 +56,9 @@ Components of TripleO that are responsible for building disk images.
 %{_datadir}/%{name}/elements
 
 %changelog
+* Tue Jul 15 2014 Derek Higgins <derekh@redhat.com> - XXX
+- Remove upsteam patch Remove-fixfiles-from-rpm-distro-finalize.patch
+
 * Wed Jul 02 2014 James Slagle <jslagle@redhat.com> - 0.1.15-3
 - Add patch Remove-fixfiles-from-rpm-distro-finalize.patch
 

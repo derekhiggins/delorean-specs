@@ -41,7 +41,6 @@ Source30:         openstack-nova-novncproxy.sysconfig
 #
 Patch0001: 0001-Ensure-we-don-t-access-the-net-when-building-docs.patch
 Patch0002: 0002-remove-runtime-dep-on-python-pbr.patch
-Patch0003: 0003-Revert-Replace-oslo.sphinx-with-oslosphinx.patch
 Patch0005: 0005-Move-notification-point-to-a-better-place.patch
 Patch0006: 0006-Fixes-rbd-backend-image-size.patch
 
@@ -397,7 +396,6 @@ This package contains documentation files for nova.
 
 %patch0001 -p1
 %patch0002 -p1
-%patch0003 -p1
 %patch0005 -p1
 %patch0006 -p1
 

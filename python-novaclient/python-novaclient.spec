@@ -14,7 +14,6 @@ Source0:          http://pypi.python.org/packages/source/p/%{name}/%{name}-%{ver
 # patches_base=2.17.0
 #
 Patch0001: 0001-Remove-runtime-dependency-on-python-pbr.patch
-Patch0002: 0002-Replace-oslosphinx-with-oslo.sphinx.patch
 
 BuildArch:        noarch
 BuildRequires:    python-setuptools
@@ -55,7 +54,6 @@ This package contains auto-generated documentation.
 %setup -q
 
 %patch0001 -p1
-%patch0002 -p1
 
 # We provide version like this in order to remove runtime dep on pbr.
 sed -i s/REDHATNOVACLIENTVERSION/%{version}/ novaclient/__init__.py

@@ -63,9 +63,6 @@ sed -i s/RPMVERSION/%{version}/ openstack_auth/__init__.py
 # to distutils requires_dist config
 rm -f {test-,}requirements.txt
 
-# make doc build compatible with python-oslo-sphinx RPM
-sed -i 's/oslosphinx/oslo.sphinx/' doc/source/conf.py
-
 %build
 %{__python} setup.py build
 

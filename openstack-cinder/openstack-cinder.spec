@@ -1,8 +1,8 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
 Name:             openstack-cinder
-Version:          2014.1.1
-Release:          2%{?dist}
+Version:          XXX
+Release:          1%{?dist}
 Summary:          OpenStack Volume service
 
 Group:            Applications/System
@@ -25,7 +25,6 @@ Source20:         cinder-sudoers
 #
 Patch0001: 0001-Ensure-we-don-t-access-the-net-when-building-docs.patch
 Patch0002: 0002-Remove-runtime-dep-on-python-pbr-python-d2to1.patch
-Patch0003: 0003-Revert-Switch-over-to-oslosphinx.patch
 Patch0004: 0004-notify-calling-process-we-are-ready-to-serve.patch
 Patch0005: 0005-Move-notification-point-to-a-better-place.patch
 
@@ -145,7 +144,6 @@ This package contains documentation files for cinder.
 
 %patch0001 -p1
 %patch0002 -p1
-%patch0003 -p1
 %patch0004 -p1
 %patch0005 -p1
 
@@ -297,6 +295,9 @@ fi
 %endif
 
 %changelog
+* Tue Jul 15 2014 Derek Higgins <derekh@redhat.com> - XXX
+- Remove patches from upstream
+
 * Wed Jun 11 2014 Eric Harney <eharney@redhat.com> - 2014.1.1-2
 - Add dependency on iscsi-initiator-utils
 
