@@ -25,7 +25,8 @@ Patch0004: 0004-Add-a-customization-module-based-on-RHOS.patch
 Patch0005: 0005-move-RBAC-policy-files-and-checks-to-etc-openstack-d.patch
 Patch0006: 0006-move-SECRET_KEY-secret_key_store-to-tmp.patch
 Patch0011: 0011-remove-runtime-dep-to-python-pbr.patch
-
+Patch0012: 0012-Remove-references-to-xstatic.patch
+Patch0013: 0013-Unwrap-setting-of-SECRET_KEY.patch
 
 
 #
@@ -70,6 +71,8 @@ BuildRequires:   python-netaddr
 BuildRequires:   python-kombu
 BuildRequires:   python-anyjson
 BuildRequires:   python-iso8601
+BuildRequires:   python-stevedore
+BuildRequires:   python-saharaclient
 
 
 # additional provides to be consistent with other django packages
@@ -106,9 +109,11 @@ Requires:   python-swiftclient
 Requires:   python-heatclient
 Requires:   python-ceilometerclient
 Requires:   python-troveclient >= 1.0.0
+Requires:   python-saharaclient
 Requires:   python-netaddr
 Requires:   python-oslo-config
 Requires:   python-eventlet
+Requires:   python-stevedore
 
 BuildRequires: python-django-openstack-auth >= 1.1.4
 BuildRequires: python-django-compressor >= 1.3
@@ -179,9 +184,6 @@ sed -i s/REDHATRELEASE/%{release}/ horizon/version.py
 # Remove the requirements file so that pbr hooks don't add it
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
-
-# make doc build compatible with python-oslo-sphinx RPM
-sed -i 's/oslosphinx/oslo.sphinx/' doc/source/conf.py
 
 # drop config snippet
 cp -p %{SOURCE4} .
