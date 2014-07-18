@@ -1,4 +1,4 @@
-From 7c75c2e42a336c7663fd3544e947ecdc7bc6f133 Mon Sep 17 00:00:00 2001
+From c8e6f5917ee72646493ab239cce52441aa49c0e8 Mon Sep 17 00:00:00 2001
 From: Alan Pevec <apevec@redhat.com>
 Date: Mon, 9 Sep 2013 00:38:42 +0200
 Subject: [PATCH] remove runtime dep on python-pbr
@@ -10,18 +10,18 @@ Subject: [PATCH] remove runtime dep on python-pbr
  3 files changed, 3 insertions(+), 30 deletions(-)
 
 diff --git a/bin/keystone-all b/bin/keystone-all
-index a114728..abcd63c 100755
+index 732ee8e..e548763 100755
 --- a/bin/keystone-all
 +++ b/bin/keystone-all
-@@ -31,7 +31,6 @@ if os.path.exists(os.path.join(possible_topdir,
+@@ -21,7 +21,6 @@ import sys
  
- 
+ from oslo import i18n
  from paste import deploy
 -import pbr.version
  
- from keystone.openstack.common import gettextutils
- # NOTE(dstanek): gettextutils.enable_lazy() must be called before
-@@ -116,7 +115,7 @@ if __name__ == '__main__':
+ 
+ # If ../keystone/__init__.py exists, add ../ to Python search path, so that
+@@ -117,7 +116,7 @@ if __name__ == '__main__':
      config.set_default_for_default_log_levels()
  
      CONF(project='keystone',
@@ -31,7 +31,7 @@ index a114728..abcd63c 100755
  
      config.setup_logging()
 diff --git a/keystone/cli.py b/keystone/cli.py
-index bd2e64c..68596ac 100644
+index 8a22d5f..641d49a 100644
 --- a/keystone/cli.py
 +++ b/keystone/cli.py
 @@ -17,7 +17,6 @@ from __future__ import absolute_import
