@@ -1,22 +1,22 @@
-From 90a24a08e735ecdc237f08e80e064f2eff744616 Mon Sep 17 00:00:00 2001
+From 2f5ce83b6b2f6d57b48965faa1f47c35b567bb09 Mon Sep 17 00:00:00 2001
 From: Angus Thomas <athomas@redhat.com>
 Date: Mon, 7 Apr 2014 16:59:04 +0100
 Subject: [PATCH] Remove pbr dependency
 
 ---
- requirements.txt      | 30 ------------------------------
+ requirements.txt      | 31 -------------------------------
  setup.py              |  1 -
  test-requirements.txt | 22 ----------------------
- 3 files changed, 53 deletions(-)
+ 3 files changed, 54 deletions(-)
  delete mode 100644 requirements.txt
  delete mode 100644 test-requirements.txt
 
 diff --git a/requirements.txt b/requirements.txt
 deleted file mode 100644
-index 65aadd1..0000000
+index 91dbe4c..0000000
 --- a/requirements.txt
 +++ /dev/null
-@@ -1,30 +0,0 @@
+@@ -1,31 +0,0 @@
 -pbr>=0.6,!=0.7,<1.0
 -SQLAlchemy>=0.8.4,!=0.9.5,<=0.9.99
 -alembic>=0.6.2
@@ -41,6 +41,7 @@ index 65aadd1..0000000
 -websockify>=0.5.1,<0.6
 -oslo.config>=1.2.1
 -oslo.rootwrap
+-oslo.i18n>=0.1.0  # Apache-2.0
 -pecan>=0.4.5
 -six>=1.7.0
 -jsonpatch>=1.1
